@@ -14,11 +14,15 @@ def contact(request):
         message = request.POST.get('message')
 
         #Send email
-        send_mail(
-            subject,
-            f'Name: {fullname}\nEmail: {email}\nMobile Number: {mobile_number}\nMessage: {message}', 
-            email, ['bonolo.kamolane@gmail.com'],
-        )
+        try:
+            send_mail(
+                subject,
+                f'Name: {fullname}\nEmail: {email}\nMobile Number: {mobile_number}\nMessage: {message}', 
+                email, ['bonolo.kamolane@gmail.com'],
+            )
+        except Exception as e:
+            print(e)
 
         return redirect('home')
+    
     return render(request, 'portfolio/index.html')
